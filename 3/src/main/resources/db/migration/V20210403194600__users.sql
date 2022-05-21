@@ -1,20 +1,20 @@
-create table users
+create table "users"
 (
     id bigserial constraint users_pk
             primary key,
-    email      text not null,
-    telephone  numeric(10,0) not null,
     username   text not null,
-    is_admin  boolean not null DEFAULT FALSE,
-    password   text not null
+    password   text not null,
+    email      text,
+    telephone  numeric(10,0),
+    is_admin  boolean DEFAULT FALSE
 );
 
 
-create index users_uniquelid_uindex
-    on users (id);
+create index users_uniqueid_uindex
+    on "users" (id);
 
 create index users_username_uindex
-    on users (username);
+    on "users" (username);
 
 -- CREATE TABLE users (
 --         id BIGSERIAL PRIMARY KEY,

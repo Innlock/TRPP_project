@@ -5,7 +5,7 @@ create table advert
             primary key,
     userid     bigint not null
         constraint advert___fk_user
-            references users
+            references "users"
             on update cascade on delete cascade,
     bookid     bigint not null
         constraint advert___fk_book_id
@@ -19,5 +19,5 @@ create table advert
 create unique index advert_uniqueid_uindex
     on advert (id);
 
-create unique index advert_user_uindex
-    on advert ("userid");
+-- create unique index advert_user_uindex
+--     on advert (userid);
