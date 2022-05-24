@@ -1,5 +1,6 @@
 package com.bookshelf.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,4 +26,7 @@ public class Book {
 
     private Long year;
     private Long cost;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "book")
+    private Advert advert;
 }

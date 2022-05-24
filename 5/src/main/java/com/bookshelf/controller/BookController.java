@@ -39,6 +39,7 @@ public class BookController {
         if (id != null) {
             List<Book> books = new ArrayList<>();
             books.add(bookRepository.findById(id).orElse(null));
+            model.addAttribute("books", books);
             return "book";
         }
         //return (List<Book>) bookRepository.findAll();

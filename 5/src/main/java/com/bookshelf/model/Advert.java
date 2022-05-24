@@ -30,4 +30,9 @@ public class Advert {
     @JoinColumn(name = "userid", insertable = false, updatable = false)
     @JsonIgnore
     private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bookid", insertable = false, updatable = false)
+    @JsonIgnore
+    private Book book;
 }

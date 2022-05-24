@@ -42,6 +42,7 @@ public class AdvertController {
     public String getAdvert(@PathVariable(required = false) Long id, Model model){
         if (id != null) {
             List<Advert> adverts = new ArrayList<>();
+            model.addAttribute("adverts", adverts);
             adverts.add(advertRepository.findById(id).orElse(null));
             return "advert";
         }
