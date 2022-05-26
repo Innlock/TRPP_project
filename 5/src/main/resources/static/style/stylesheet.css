@@ -3,6 +3,7 @@
         padding: 0;
         box-sizing: border-box;
     }
+/* COMMON STYLES */
 
 a {
   text-decoration: none
@@ -11,6 +12,10 @@ a {
 #app{
         background: #767384;
     }
+
+/* --- */
+
+/*  HEADER STYLES */
 
 #header_line{
         background: #767384;
@@ -27,6 +32,12 @@ a {
         padding-right: 30px;
 }
 
+img.label-image {
+    width: 200px;
+    height: 80px;
+}
+
+/* --- */
 
 
 #content-wrapper{
@@ -72,7 +83,6 @@ a {
 }
 
 .ad-table-advert-more-btn{
-
         padding: 6px;
         margin: 0.75%;
         width: 30%;
@@ -87,3 +97,15 @@ a.ad-table-advert-more-btn:hover{
     color: #f9f1ef;
     background: #787384;
 }
+
+/* FOOTER STYLES */
+
+#footer-back-to-top-btn{
+    text-decoration: none;
+}
+
+a#footer-back-to-top-btn{
+    color: #f9f1ef;
+}
+
+/* --- */
