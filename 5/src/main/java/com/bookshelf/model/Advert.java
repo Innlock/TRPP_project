@@ -35,4 +35,18 @@ public class Advert {
     @JoinColumn(name = "bookid", insertable = false, updatable = false)
     @JsonIgnore
     private Book book;
+
+    private Advert() {
+
+    }
+    public Advert(Long userid, Long bookid, String state, Date date) {
+        this.userid = userid;
+        this.bookid = bookid;
+        this.state = state;
+        this.date = date;
+    }
+
+
+
+
 }

@@ -29,4 +29,17 @@ public class Book {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "book")
     private Advert advert;
+
+    public Book(){
+
+    }
+
+    public Book(String name, String author, String genre, String description, Long year, Long cost) {
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
+        this.description = description;
+        this.year = year;
+        this.cost = cost;
+    }
 }

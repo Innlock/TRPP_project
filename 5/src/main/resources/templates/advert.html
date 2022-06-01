@@ -12,13 +12,15 @@
             <div id="header-line-content">
                 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-2">
                     <a href="/" class="d-flex align-items-center text-light text-decoration-none">
-                        <img class="label-image" th:src="@{/label_light.png}"}/>
+                        <img class="label-image" th:src="@{/style/label_light.png}"}/>
                         <!-- <span class="fs-4">Книжный шкаф</span> -->
                     </a>
                     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                        <a class="me-3 py-2 text-light text-decoration-none" href="/books">Книги</a>
-                        <a class="me-3 py-2 text-light text-decoration-none" href="#">Поддержка</a>
-                        <a class="me-3 py-2 text-light text-decoration-none" href="#">О нас</a>
+                        <a class="me-3 py-2 text-light text-decoration-none" href="/" th:text="${username} ? ${username} : 'Гость'"/>
+                        <a type="button" th:unless="${username}" class="header-btn-login"
+                           href="/login">Войти</a>
+                        <a type="button" th:if="${username}" class="header-btn-login" style="width: 250px;"
+                           href="/create_ad">Разместить объявление</a>
                     </nav>
                 </div>
             </div>
@@ -26,10 +28,21 @@
 
         <div id="content-wrapper">
             <div th:each=" el : ${adverts}">
-                <h3 th:text="${el.getUser().getUsername()}" />
-                <p th:text="${el.getDate()}" />
-                <p th:text="${el.getState()}" />
-                <p th:text="${el.getBook().getName()}" />
+
+                <h3 th:text="${el.getBook().getName()}" />
+                <h4 th:text="${el.getBook().getAuthor()}" style="color: grey;"/>
+                <div th:if="${el.getState() == 'active'}" class="active-label">Активно</div>
+                <div th:unless="${el.getState() == 'active'}" class="active-label">Закрыто</div>
+                <table>
+                    <tr><th><p style="font-weight:normal;">Объявление выложил:</p></th><th style="padding-left: 20px;"><p th:text="${el.getUser.getUsername()}" /></th></tr>
+                    <tr><th><p style="font-weight:normal;">Номер телефона:</p></th><th style="padding-left: 20px;"><p th:text="${el.getUser.getTelephone()}" /></th></tr>
+                    <tr><th><p style="font-weight:normal;">E-mail:</p></th><th style="padding-left: 20px;"><p th:text="${el.getUser.getEmail()}" /></th></tr>
+                    <tr><th><p style="font-weight:normal;">Дата размещения:</p></th><th style="padding-left: 20px;"><p th:text="${#dates.format(el.getDate(), 'dd.MM.yyyy')}"></p></th></tr>
+                </table>
+                <p><b>Описание:</b></p>
+                <p th:text="${el.getBook.getDescription}" />
+
+
             </div>
         </div>
         <footer class="text-muted py-5">
