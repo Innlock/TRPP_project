@@ -1,0 +1,25 @@
+<div th:fragment="header_standart">
+    <div id="header-line" style="margin-bottom: 2%;">
+        <div id="header-line-content">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-flow: row wrap;">
+                <a href="/" class="d-flex align-items-center text-light text-decoration-none">
+                    <img class="label-image" th:src="@{/style/label_light.png}"}/>
+                </a>
+                <nav class="header-right">
+                    <a class="me-3 py-2 text-light text-decoration-none"
+                       href="/" th:text="${username} ? ${username} : 'Гость'"/>
+
+                    <a type="button" th:unless="${username}" class="header-btn-login"
+                       href="/login">Войти</a>
+
+                    <form th:if="${username}" th:action="@{/logout}" method="post">
+                        <input type="submit" class="header-btn-login" style="width: 250px; margin: 5px;"
+                               value="Выйти из аккаунта"/>
+                    </form>
+                    <a type="button" th:if="${username}" class="header-btn-login" style="width:250px; margin: 5px;"
+                       href="/create_ad">Разместить объявление</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
