@@ -1,6 +1,8 @@
 package com.bookshelf.model;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 @Table(name = "users", schema = "public")
 @Data
 @Entity
+@RequiredArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,16 +32,12 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Advert> adverts = new ArrayList<>();
 
-
+    @Autowired
     public User(String username, String password, String email, Long telephone) {
         this.username = username;
         this.password = password;
         this.telephone = telephone;
         this.email = email;
         this.isAdmin = false;
-    }
-
-    public User() {
-
     }
 }

@@ -1,7 +1,7 @@
 package com.bookshelf.controller;
 
-
 import com.bookshelf.model.User;
+import com.bookshelf.repository.AdvertRepository;
 import com.bookshelf.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,8 @@ import java.util.Optional;
 public class RegistrationController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AdvertRepository advertRepository;
 
     @GetMapping("/registration")
     public String registration(){

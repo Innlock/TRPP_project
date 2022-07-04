@@ -1,7 +1,8 @@
 package com.bookshelf.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "book", schema = "public")
 @Data
 @Entity
+@RequiredArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,17 +32,14 @@ public class Book {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "book")
     private Advert advert;
 
-    ////
-    public Book(String name, String author, String genre, String description, Long year, Long cost) {
+    @Autowired
+    public Book(String name, String author, String genre, String description,String state, Long year, Long cost) {
         this.name = name;
         this.author = author;
         this.genre = genre;
         this.description = description;
+        this.state = state;
         this.year = year;
         this.cost = cost;
-    }
-
-    public Book() {
-
     }
 }

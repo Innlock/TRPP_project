@@ -2,6 +2,8 @@ package com.bookshelf.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +16,7 @@ import java.util.Date;
 @Table(name = "advert", schema = "public")
 @Data
 @Entity
+@RequiredArgsConstructor
 public class Advert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,16 +39,11 @@ public class Advert {
     @JsonIgnore
     private Book book;
 
-    ////
-    private Advert() {
-
-    }
+    @Autowired
     public Advert(Long userid, Long bookid, String state, Date date) {
         this.userid = userid;
         this.bookid = bookid;
         this.state = state;
         this.date = date;
     }
-
-////
 }

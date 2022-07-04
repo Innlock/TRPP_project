@@ -6,8 +6,11 @@
                     <img class="label-image" th:src="@{/style/label_light.png}"}/>
                 </a>
                 <nav class="header-right">
-                    <a class="me-3 py-2 text-light text-decoration-none"
-                       href="/" th:text="${username} ? ${username} : 'Гость'"/>
+                    <p class="me-3 py-2 text-light text-decoration-none"
+                       th:text="${username} ? ${username} : 'Гость'"/>
+
+                    <a type="button" th:if="${username}" class="header-btn-login" style="width:250px; margin: 5px;"
+                       href="/my-adverts">Мои объявления</a>
 
                     <a type="button" th:unless="${username}" class="header-btn-login"
                        href="/login">Войти</a>

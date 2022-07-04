@@ -1,6 +1,7 @@
 package com.bookshelf.controller;
 
 import com.bookshelf.model.Advert;
+import com.bookshelf.model.User;
 import com.bookshelf.repository.AdvertRepository;
 import com.bookshelf.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 /**
  * HelloController - a simple controller for studying the concept of mapping
@@ -69,4 +72,20 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/my-adverts")
+    public String my_adverts(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        Optional user_or_null = userRepository.findByUsername(userDetail.getUsername());
+        if (user_or_null.isPresent()) {
+            model.addAttribute("username", userDetail.getUsername());
+            Long user_id = User.class.cast(user_or_null.get()).getId();
+            //System.out.println(user_id);
+            Iterable<Advert> ads = advertRepository.findByUserid(user_id);
+            if(ads != null){
+                model.addAttribute("adverts", ads);
+            }
+        }
+        return "my-adverts";
     }
+}

@@ -12,11 +12,11 @@ The main function of the portal is to provide a platform for buying and selling 
 
 1. Сlone the project:
 ```bash
-  git clone https://github.com/Innlock/learningSpring.git
+  git clone https://github.com/Innlock/TRPP_project.git
 ```
 2. Go to the correct folder:
 ```bash
-  cd learningSpring
+  cd TRPP_project
 ```
 3. Run this command in project root:
 ```bash
@@ -44,7 +44,7 @@ To stop press `Ctrl+C`
 
 ## Authors
 
-* **Anna Chistozvonova** - *Work with the server*
+* **Anna Chistozvonova** - *Backend*
 * **Maxim Vishnyakov** - *Frontend*
 * **Artyom Popov** - *Work with databases*
 

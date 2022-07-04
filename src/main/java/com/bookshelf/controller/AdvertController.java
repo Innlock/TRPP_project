@@ -15,10 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * AdvertController - request handler for adverts
@@ -35,13 +32,14 @@ public class AdvertController {
 
     /**
      * Post request will extract all the info from json and create an entity class out of it.
+     *
      * @param advert (json)
      * @return advert json (if it was successfully saved)
      */
     @PostMapping("/adverts")
     public Advert create(@RequestBody Advert advert) {
         if (advert.getDate() == null) {
-            advert.setDate( new Date(System. currentTimeMillis()) );
+            advert.setDate(new Date(System.currentTimeMillis()));
         }
         return advertRepository.save(advert);
     }
@@ -66,61 +64,60 @@ public class AdvertController {
                             @RequestParam String book_author,
                             @RequestParam String book_desc,
                             @RequestParam String book_year,
+                            @RequestParam String book_state,
                             @RequestParam String book_genre,
                             @RequestParam String book_cost,
                             Map<String, Object> model) {
-        if(book_name=="" || book_author=="" || book_genre.isEmpty()){
+        if (book_name == "" || book_author == "" || book_genre.isEmpty()) {
             model.put("message", "Не вся информация заполнена");
             return "create_ad";
         }
-        if (book_desc.isEmpty()){
-            book_desc="Описания нет";
+        if (book_desc.isEmpty()) {
+            book_desc = "Описания нет";
         }
-        if (book_cost.isEmpty()){
-            book_cost="0";
+        if (book_state.isEmpty()) {
+            book_state = "Не указано";
         }
-        if (book_year.isEmpty()){
-            book_year="0000";
+        if (book_cost.isEmpty()) {
+            book_cost = "0";
+        }
+        if (book_year.isEmpty()) {
+            book_year = "0000";
         }
         Book book = new Book(book_name,
                 book_author,
                 book_genre,
                 book_desc,
+                book_state,
                 Long.parseLong(book_year),
                 Long.parseLong(book_cost)
         );
 
-        ///кринж поиск через перебор
         Long book_id = bookRepository.save(book).getId();
-        //System.out.print("---BOOK_ID---" + book_id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetail = (UserDetails) auth.getPrincipal();
-        List<User> users = (List<User>) userRepository.findAll();
-        long user_id = 0;
-        for (User user : users) {
-            //System.out.println(userDetail.getUsername() + " : " + user.getUsername());
-            if (userDetail.getUsername().equalsIgnoreCase(user.getUsername())){
-                user_id = user.getId();
-            }
+        Optional user = userRepository.findByUsername(userDetail.getUsername());
+        if (user.isPresent()) {
+            Long user_id = User.class.cast(user.get()).getId();
+            Advert advert = new Advert(
+                    user_id,
+                    book_id,
+                    "active",
+                    new Date()
+            );
+            advertRepository.save(advert);
         }
-
-        Advert advert = new Advert(
-                user_id,
-                book_id,
-                "active",
-                new Date()
-        );
-        advertRepository.save(advert);
         return "redirect:/";
     }
 
     /**
      * Get request will convert class entity to json and return it (of id is specified) or them.
+     *
      * @param id id specified in the link
      * @return advert (with the specified id) or adverts (json)
      */
     @GetMapping(value = {"/adverts", "/adverts/{id}"})
-    public String getAdvert(@PathVariable(required = false) Long id, Model model){
+    public String getAdvert(@PathVariable(required = false) Long id, Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if ((!(auth instanceof AnonymousAuthenticationToken)) && auth != null) {
@@ -139,16 +136,16 @@ public class AdvertController {
             adverts.add(advertRepository.findById(id).orElse(null));
             return "advert";
         }
-
         return "adverts";
     }
 
     /**
      * Patch request will call the markAsSold(id) function that changes "state" of advert to "sold".
+     *
      * @param id id specified in the link
      */
     @PatchMapping("/adverts/{id}:mark-as-sold")
-    public void patchMethod(@PathVariable Long id){
+    public void patchMethod(@PathVariable Long id) {
         advertRepository.markAsSold(id);
     }
 }
