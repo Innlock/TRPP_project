@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/style/**", "/adverts/**", "/advert/**", "/genre/**", "/registration").permitAll()
+                .antMatchers("/", "/style/**", "/adverts/**", "/adverts/**", "/advert/**", "/genre/**", "/registration").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -42,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .permitAll();
+        http.cors().disable() .csrf().disable();
     }
 
     @Bean

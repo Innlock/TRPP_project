@@ -13,6 +13,8 @@
     <div id="content-wrapper">
         <div th:each=" el : ${adverts}">
 
+            <a type="button" th:if="${owner}" class="header-btn-login" style="width:250px; margin: 5px;"
+               th:href="'/adverts/' + ${el.getId()} + '/edit'">Редактировать</a>
             <h3 th:text="${el.getBook().getName()}"/>
             <h4 th:text="${el.getBook().getAuthor()}" style="color: grey;"/>
             <div th:if="${el.getState() == 'active'}" class="active-label">Активно</div>

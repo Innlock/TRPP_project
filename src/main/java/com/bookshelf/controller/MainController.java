@@ -69,7 +69,7 @@ public class MainController {
                 model.addAttribute("username", "");
             }
         }
-        return "greeting";
+        return "main-page";
     }
 
     @GetMapping("/my-adverts")
