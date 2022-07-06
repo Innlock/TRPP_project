@@ -248,8 +248,28 @@ public class AdvertController {
      *
      * @param id id specified in the link
      */
-    @PatchMapping("/adverts/{id}:mark-as-sold")
-    public void patchMethod(@PathVariable Long id) {
+    @PostMapping("/adverts/{id}/mark-as-sold")
+    public String patch1Method(@PathVariable(required = false) Long id) {
         advertRepository.markAsSold(id);
+        return "redirect:/adverts/"+id;
+    }
+
+    @PostMapping("/adverts/{id}/mark-as-active")
+    public String patch2Method(@PathVariable(required = false) Long id) {
+        advertRepository.markAsActive(id);
+
+        return "redirect:/adverts/"+id;
+    }
+
+    @PostMapping("/adverts/{id}/delete")
+    public String deleteMethod(@PathVariable(required = false) Long id) {
+        Advert advert = advertRepository.findById(id).orElse(null);
+        if(advert == null){
+            return "redirect:/";
+        }
+        Book book = advert.getBook();
+        advertRepository.delete(advert);
+        bookRepository.delete(book);
+        return "redirect:/";
     }
 }

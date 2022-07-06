@@ -26,5 +26,9 @@ public interface AdvertRepository extends PagingAndSortingRepository<Advert, Lon
     @Query("UPDATE Advert t SET t.state = \'sold\' WHERE t.id =:id")
     void markAsSold(@Param("id") Long id);
 
+    @Modifying
+    @Query("UPDATE Advert t SET t.state = \'active\' WHERE t.id =:id")
+    void markAsActive(@Param("id") Long id);
+
     Iterable<Advert> findByUserid(Long user_id);
 }

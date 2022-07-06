@@ -12,9 +12,26 @@
 
     <div id="content-wrapper">
         <div th:each=" el : ${adverts}">
+            <div style="display: flex; align-items: baseline; flex-flow: row wrap; justify-content: flex-start;">
+                <a type="button" th:if="${owner}" class="header-btn-login" style="width:250px; margin: 5px;"
+                   th:href="'/adverts/' + ${el.getId()} + '/edit'">Редактировать</a>
+                <form th:action="'/adverts/' + ${el.getId()} + '/delete'" method="post">
+                    <button th:if="${owner}" class="header-btn-login" style="width:250px; margin: 5px;">Удалить</button>
+                </form>
+                <br>
+                <form th:action="'/adverts/' + ${el.getId()} + '/mark-as-sold'" method="post">
+                    <button th:if="${owner} and ${el.getState()} == 'active'" class="header-btn-login"
+                            style="width:250px; margin: 5px; border: 2px solid #767384;">Закрыть объявление
+                    </button>
+                </form>
+                <form th:action="'/adverts/' + ${el.getId()} + '/mark-as-active'" method="post">
+                    <button th:if="${owner} and ${el.getState()}=='sold'" class="header-btn-login"
+                            style="width:250px; margin: 5px; border: 2px solid #767384;">Открыть объявление
+                    </button>
+                </form>
+            </div>
 
-            <a type="button" th:if="${owner}" class="header-btn-login" style="width:250px; margin: 5px;"
-               th:href="'/adverts/' + ${el.getId()} + '/edit'">Редактировать</a>
+
             <h3 th:text="${el.getBook().getName()}"/>
             <h4 th:text="${el.getBook().getAuthor()}" style="color: grey;"/>
             <div th:if="${el.getState() == 'active'}" class="active-label">Активно</div>
@@ -36,13 +53,25 @@
                     <th><p style="font-weight:normal;">Дата размещения:</p></th>
                     <th style="padding-left: 20px;"><p th:text="${#dates.format(el.getDate(), 'dd.MM.yyyy')}"></p></th>
                 </tr>
-                <tr><th><p style="font-weight:normal;">Цена:</p></th><th style="padding-left: 20px;"><p th:text="${el.getBook().getCost()}"></p></th></tr>
+                <tr>
+                    <th><p style="font-weight:normal;">Цена:</p></th>
+                    <th style="padding-left: 20px;"><p th:text="${el.getBook().getCost()}"></p></th>
+                </tr>
             </table>
             <p><b>Информация о книге:</b></p>
             <table>
-                <tr><th><p style="font-weight:normal;">Жанр:</p></th><th style="padding-left: 20px;"><p th:text="${el.getBook().getGenre()}" /></th></tr>
-                <tr><th><p style="font-weight:normal;">Состояние:</p></th><th style="padding-left: 20px;"><p th:text="${el.getBook().getState()}" /></th></tr>
-                <tr><th><p style="font-weight:normal;">Год издания:</p></th><th style="padding-left: 20px;"><p th:text="${el.getBook().getYear()}" /></th></tr>
+                <tr>
+                    <th><p style="font-weight:normal;">Жанр:</p></th>
+                    <th style="padding-left: 20px;"><p th:text="${el.getBook().getGenre()}"/></th>
+                </tr>
+                <tr>
+                    <th><p style="font-weight:normal;">Состояние:</p></th>
+                    <th style="padding-left: 20px;"><p th:text="${el.getBook().getState()}"/></th>
+                </tr>
+                <tr>
+                    <th><p style="font-weight:normal;">Год издания:</p></th>
+                    <th style="padding-left: 20px;"><p th:text="${el.getBook().getYear()}"/></th>
+                </tr>
 
             </table>
             <p>Описание:</p>
