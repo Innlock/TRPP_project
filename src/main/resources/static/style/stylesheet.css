@@ -13,6 +13,36 @@ input {
     text-align: center;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: #767384;
+    height: 100%;
+    width: 100%;
+}
+
+#content-wrapper {
+    padding: 2% 2% 10%;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    background: #f5f5f5;
+    min-height: 100%;
+    min-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+#app {
+    min-height: 100%;
+    min-width: 100%;
+    height: auto;
+    width: auto;
+    background: #f5f5f5;
+}
+
 ::-webkit-input-placeholder {
     text-align: center;
 }
@@ -21,27 +51,21 @@ input {
     text-align: center;
 }
 
-#app {
-    background: #767384;
-}
 
 /* --- */
 
 /*  HEADER STYLES */
-
-#header_line {
+#header {
     background: #767384;
     padding: 1%;
     padding-right: 4%;
     color: #f9f1ef;
     display: flex;
-    justify-content: right;
-}
 
-#header-line-content {
-    padding-top: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
+    margin-bottom: 2%;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: row wrap;
 }
 
 img.label-image {
@@ -92,13 +116,6 @@ a.header-btn-login:hover {
 /* --- */
 
 
-#content-wrapper {
-    padding: 2% 2% 10%;
-    border-top-right-radius: 30px;
-    border-top-left-radius: 30px;
-    background: #f5f5f5;
-}
-
 #login-form-holder {
     padding: 2%;
     padding-bottom: 100%;
@@ -108,6 +125,7 @@ a.header-btn-login:hover {
 }
 
 #login-form {
+    text-align: center;
     width: 500px;
     height: 500px;
     padding: 2%;
@@ -117,7 +135,10 @@ a.header-btn-login:hover {
 }
 
 #login-table {
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 2% auto;
 }
 
@@ -126,8 +147,7 @@ a.header-btn-login:hover {
     padding-bottom: 5px;
     width: 50%;
     height: 50px;
-    margin-top: 2%;
-    margin-left: 25%;
+    margin: 2% auto;
     border-radius: 20px;
     border: 1px none;
     background: #767384;
@@ -143,6 +163,7 @@ a.header-btn-login:hover {
     border-color: #767384;
     background: #fff;
     width: 100%;
+    align-self: center;
     margin-left: auto;
 }
 
@@ -202,9 +223,7 @@ a.cat-btn {
 }
 
 .ad-table-advert {
-    padding: 15px;
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding: 20px 15px;
     margin: 1.5%;
     margin-top: 0;
     margin-bottom: 20px;
@@ -235,29 +254,32 @@ a.ad-table-advert-more-btn:hover {
 
 .ad-cr-table {
     width: 100%;
-    margin-top: 20px;
 }
 
 .ad-cr-table-input {
     border-radius: 5px;
     margin-bottom: 15px;
     width: 60%;
-    margin-left: auto;
-    border: solid;
-    border-width: 1px;
+    border: 1px solid;
     height: 40px;
-    margin-left: 20%
+    margin-left: 20%;
+}
+
+.ad-cr-table-input-text {
+    align: right;
+    font-size: small;
+    width: 60%;
+    height: 40px;
+    margin: 0 0 15px 20%;
 }
 
 .ad-cr-table-btn {
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 30%;
+    width: 200px;
     height: 40px;
-    margin-left: 35%;
     border-radius: 20px;
-    border: none;
-    border-width: 1px;
+    border: 1px none;
     background: #767384;
     color: #fff;
     text-align: center;
@@ -277,13 +299,19 @@ a.ad-table-advert-more-btn:hover {
     margin-bottom: 20px;
 }
 
-.advert-description{
+.advert-description {
     padding: 20px;
     border: 2px solid #767384;
     word-wrap: break-word;
 }
 
 /* FOOTER STYLES */
+
+#footer {
+    width: 100%;
+    margin: 0 auto;
+    background: #767384;
+}
 
 #footer-back-to-top-btn {
     text-decoration: none;

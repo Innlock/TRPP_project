@@ -207,7 +207,7 @@ public class AdvertController {
         }
         String url="/adverts/"+id+"/edit";
 
-        if (book_name == "" || book_author == "" || book_genre.isEmpty()) {
+        if (book_name == "" || book_author == "" || book_genre.isEmpty() || book_cost.isEmpty()) {
             model.addAttribute("message", "Не вся информация заполнена");
             model.addAttribute("adverts", new Object[]{advert});
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -222,9 +222,6 @@ public class AdvertController {
         }
         if (book_state.isEmpty()) {
             book_state = "Не указано";
-        }
-        if (book_cost.isEmpty()) {
-            book_cost = "0";
         }
         if (book_year.isEmpty()) {
             book_year = "0000";

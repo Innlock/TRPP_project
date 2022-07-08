@@ -32,7 +32,7 @@ public class RegistrationController {
                             @RequestParam String telephone,
                             Map<String, Object> model) {
         if(username=="" || password=="" || (email.isEmpty() && telephone.isEmpty())){
-            model.put("message", "Не вся информация заполнена");
+            model.put("message", "Не вся информация заполнена\n(обязательно укажите логин и пароль, также укажите либо почту, либо телефон)");
             return "registration";
         }
         if (telephone.isEmpty()){
